@@ -118,6 +118,11 @@
 \newcommand{\hl}{\color{red}}
 
 
+\newcommand{\gf}{\mathfrak{g}}
+\newcommand{\tf}{\mathfrak{t}}
+\newcommand{\Str}{\mathrm{STr}}
+
+
 
 \newcommand{\dom}{\mathrm{dom}}
 \newcommand{\supp}{\mathrm{supp}}
@@ -160,14 +165,219 @@ Based on joint work with N.~Higson, S.~Liu, F.~Sukochev and D.~Zanin}
 \makebeamertitle
 
 \begin{frame}{Introduction}
-Lorem ipsum dolor sit amet, consectetur adipiscing elit. Maecenas commodo metus ac fermentum molestie. Aliquam vitae lorem tempus, pulvinar velit et, condimentum massa. Integer sem mauris, tristique vitae velit semper, condimentum tempor ex. Nullam venenatis ante fermentum vehicula fermentum.  Mauris nunc magna, commodo et tellus vitae, semper venenatis sapien. Nam egestas, nunc sed euismod ullamcorper, velit libero semper orci, at venenatis arcu enim ut nunc. Nam pulvinar scelerisque vulputate. Donec lobortis, magna id suscipit rhoncus, magna leo ultrices lacus, non laoreet diam massa in sapien. 
+  The \textbf{hypoelliptic Laplacian} of J.~M.~Bismut has an intimidating reputation.
+  
+  \pause
+  But... where does it come from?\\
+  \pause
+  What is it good for?\\
+  \pause
+  And, most importantly, how do we prove things about it?
 \end{frame}
 
-\section{Curabitur sit}
+\section{In the beginning...}
+
+
+\section{Frenkel's formula}
 
 \begin{frame}
-    \huge{Section 1: Curabitur sit amet massa egestas, convallis quam et, tincidunt enim}
+  \huge{Section 1: Frenkel's formula}
 \end{frame}
+
+\begin{frame}
+  Let $G$ be a connected, simply connected, compact group. There is the Casimir element, $\Delta_G \in \Uc(\gf).$
+  
+  What is $\Tr(e^{t\Delta_G})$?
+  
+  Some possible answers:
+  \begin{enumerate}
+    \item{} Spectral (Peter-Weyl) representation: we have
+    \[
+        \Tr(e^{t\Delta_G}) = \sum_{\lambda\in CR^*_+} \left(\prod_{\alpha>0} \frac{\langle \alpha,\rho+\lambda\rangle}{\langle \alpha,\rho\rangle}\right)^2e^{-tB(\lambda+2\rho,\lambda)}
+    \]
+    where $W_+$ is the weight lattice, $\prod_{\alpha>0}$ is the product over positive roots, $\rho$ is the Weyl element, and $B$ is the bilinear pairing on $\gf^*.$
+    \item{} Minakshisundaram-Pleijel expansion: asymptotically, as $t\to 0,$ we have
+    \[
+        \Tr(e^{t\Delta_G}) \sim (4\pi t)^{-\frac{\mathrm{dim}(G)}{2}}(a_0+a_1t+a_2t^2+\cdots)
+    \]
+    where $a_0, a_1, $ etc. are determined by the geometry of $G.$
+  \end{enumerate}
+  Is there another (more insightful) representation?
+\end{frame}
+
+\begin{frame}{Jacobi identity}
+  If $G = \Circ$ is the unit circle, the answer is \emph{yes}. We have
+  \[
+    \Tr(e^{t\Delta_{\Circ}}) = \mathrm{Vol}(\Circ)(4\pi t)^{-\frac12}\sum_{n\in \Itgr} e^{-\frac{1}{4t}n^2}.
+  \]
+  We can prove this via the Poisson summation formula and the fact that
+  \[
+    \Tr(e^{t\Delta_{\Circ}}) = \sum_{n\in \Itgr} e^{-tn^2}
+  \]
+  
+  
+  Is there something similar for a general Lie group?
+\end{frame}
+
+\begin{frame}{Frenkel's formula}
+  It turns out that $\Tr(e^{t\Delta_G})$ is too difficult to compute. Instead, we can compute a ``shifted" version
+  \[
+    \Tr(\lambda(e^H)e^{t\Delta_G})
+  \]
+  where $H\in \tf,$ and $\lambda(e^H)$ is the left shift operator by $e^H\in G.$
+  \begin{theorem}[Frenkel (1984)]
+      If $H\in \tf$ is regular (i.e., $\alpha(H)\neq 0$ for all roots $\alpha$), then
+      \[
+          \Tr(\lambda(e^H)e^{t\Delta_G}) = \frac{\mathrm{Vol}(G)e^{4\pi^2t|\rho|^2}}{(4\pi t)^{\frac{\mathrm{dim}(G)}{2}}\sigma(H)}\sum_{\gamma \in CR} \left(\prod_{\alpha>0} \langle 2\pi \alpha,H+\gamma\rangle\right) e^{-\frac{1}{4t}|H+\gamma|^2} 
+      \]
+      where $\sigma$ is the Weyl denominator.
+  \end{theorem}
+\end{frame}
+
+\begin{frame}{Proof of Frenkel's formula}
+    Frenkel's formula is proved using the explicit spectral decomposition of $\Delta_G$ and the Weyl character formula. From these facts, we have
+    \[
+      \Tr(\lambda(e^H)e^{t\Delta_G}) = \frac{1}{\sigma(H)}\sum_{\lambda \in CR^*_+} \sum_{w \in W} \sgn(w)e^{w(\lambda+\rho)(H)}e^{-tB(\lambda+2\rho,\lambda)}
+    \]
+    Some basic facts from representation theory and Poisson's summation formula give the proof.
+\end{frame}
+
+
+\begin{frame}
+    \huge{Section 2: The Primordial History, or, the Berline-Vergne localisation formula}
+\end{frame}
+
+\begin{frame}{Section introduction}
+  In this section, I will attempt to give a ``folkloric" story for the origins of the hypoelliptic Laplacian.
+  
+  I am strongly indebetted to the paper of Choi--Takhtajan (2021).
+\end{frame}
+
+\begin{frame}{The Hamiltonian-Lagrangian correspondence}
+  In its most general terms, the path integral method in quantum mechanics relates traces of semigroups
+  to integrals over loop space. 
+  
+  The way it is supposed to work is as follows: $X$ is a manifold, and $\Lc \in C^\infty(TX)$ is a ``Lagrangian". The corresponding
+  ``Hamiltonian" $\Hc\in C^\infty(T^*X)$ is related to $\Lc$ by the Legendre transform 
+  \[
+    \Hc(x,p) = \sup_{X \in T_xX} (p(X)-\Lc(x,X)),\quad (x,p) \in T^*X.
+  \]
+\end{frame}
+
+\begin{frame}{The Hamiltonian-Lagrangian correspondence}
+  We are supposed to have something like the following:
+  \begin{equation}
+    \Tr(e^{-t\Hc(x,-i\partial)}) = \int_{LX} e^{-\int_0^t \Lc(\gamma(s),\gamma'(s))\,ds} \Dc \gamma.
+  \end{equation}
+  Here, $\Hc(x,-i\partial)$ is an operator on the Hilbert space $L_2(X)$ defined by some kind of quantisation of $\Hc,$ $LX$ is the space of loops, that is functions $S^1\to X,$ and ``$\Dc\gamma$" is some kind of measure on loop space.\\
+  
+  
+  Both sides of this formula are problematic, but the left-hand-side is a bit more accessible. 
+\end{frame}
+
+\begin{frame}{The Hamiltonian-Lagrangian correspondence}
+  One case (and one of the few cases that is well-understood) is for $\Delta_g,$ the Laplace operator on a compact Riemannian manifold
+  \[
+    \frac12\Delta_gu = \frac12\det(g)^{-\frac12}\partial_{\alpha}(g^{\alpha,\beta}\det(g)^{\frac12}\partial_{\beta}u)
+  \]
+  This is supposed to be $\Hc(x,-i\partial),$ where $\Hc(x,p) = \frac12 g^{\alpha,\beta}(x)p_{\alpha}p_{\beta}.$ The corresponding Lagrangian is 
+  \[
+    \Lc(x,X) = \frac12 g_{\alpha,\beta}(x)X^{\alpha}X^{\beta}
+  \]
+  and 
+  \[
+    \Tr(e^{\frac12 t\Delta_g}) = \int_{LX} e^{-\int_0^t \frac12 g_{\alpha,\beta}(\gamma(s))\dot{\gamma}^{\alpha}(s)\dot{\gamma}^\beta(s)\,ds}\, \Dc \gamma
+  \]
+  where the integral on the right-hand side is rigorously defined as a limit of natural discrete approximations. See Anderson-Driver.
+\end{frame}
+
+\begin{frame}{Berline-Vergne localisation}
+  Suppose that we're trying to compute the integral of a differential form $\alpha$ over a manifold $Z,$ like
+  \[
+    \int_Z \alpha,\quad \alpha\in \Omega^{\mathrm{top}}(Z).
+  \]
+  There is a very effective trick for computing this integral if we have some $\Circ$-action: Assume that $\Circ$ acts
+  on $Z,$ and $\alpha$ is invariant under this action. We have
+  \begin{theorem}[Berline-Vergne localisation]
+    \[
+      \int_Z \alpha = \int_{Z^{0}} \frac{\alpha}{e(N(Z/Z^0))}
+    \]
+    where $Z^0$ is the fixed submanifold under the $\Circ$-action, and $e(N(Z/Z^0))$ is the Euler class of the normal bundle to $Z^0$ in $Z.$    
+  \end{theorem}
+  What is of greater interest to us is actually the standard proof of the Berline-Vergne formula.
+\end{frame}
+
+\begin{frame}{Proof of Berline-Vergne localisation}
+    Berline-Vergne localisation can be proved in the following way. It is possible to find a differential form $\Vc \in \Omega^2(X)$ such that
+    \[
+      \int_Z \alpha = \int_Z \alpha e^{b\Vc},\quad b>0.
+    \]
+    This is proved by showing that the right hand side is independent of $b,$ and then setting $b=0.$ The limit as $b\to\infty$
+    is computed using Laplace's method.
+    
+\end{frame}
+
+\begin{frame}{Bismut's dream}
+  We would like to compute $\Tr(e^{t\Delta_g})$ by considering
+  \[
+    \int_{LX} e^{-\int_0^t \Lc(\gamma(s),\dot{\gamma}(s))\,ds} \Dc\gamma
+  \]
+  as an integral of a differential form over the infinite dimensional manifold $LX.$
+  \pause
+  We could try to mimic the proof of Berline-Vergne by introducing a $1$-parameter perturbation of $\Lc,$ something like
+  \[
+      \int_{LX} e^{-\int_0^t \Lc(\gamma(s),\dot{\gamma}(s))+b\Vc\,ds} \Dc\gamma
+  \]
+  where $b>0,$ and computing the limit as $b\to\infty.$
+  \pause
+  This is \textbf{TOO HARD}.
+\end{frame}
+
+\begin{frame}{Bismut's dream}
+  Doing Berline-Vergne in loop space is too difficult, the technicalities in making sense of the path integral are too great. 
+  
+  But maybe, we can use the Hamiltonian-Lagrangian correspondence to replace incomprehensible loop space integrals with slightly more comprehensible operator traces.
+  \begin{center}
+    Can we find an operator $\Lc_b$ depending on a parameter $b$ such that
+    \[
+      \Tr(e^{t\Delta_g}) = \Tr(e^{t\Lc_b})
+    \]
+    for all $b>0,$ and such that the limit as $b\to\infty$ gives an interesting formula for the trace?
+  \end{center}
+  \textbf{Answer}: In a way, yes. Not precisely as stated above, but we can get close enough.
+\end{frame}
+
+\begin{frame}{The hypoelliptic Laplacian}
+  Let $G$ be a compact Lie group, and let $H\in \tf$ be regular. Through some combination of path integral computations, intuition, and guesswork, Bismut found a solution the preceding question.
+  \begin{theorem}
+    There is a differential operator $\Lc_{b,H},$ depending on a positive real parameter $b,$ acting on the space
+    \[
+      C^\infty(\gf\times G,\bigwedge^{\bullet}\gf)
+    \]
+    such that
+    \[
+       \Tr(\lambda(e^H)e^{t\Delta_G}) = \Str(e^{-t\Lc_{b,H}}),\quad b>0.
+    \]
+    As $b\to\infty,$ it can be proved that $\Str(e^{-t\Lc_{b,H}})$ converges to Frenkel's formula.
+  \end{theorem}
+\end{frame}
+
+\section{The form of $\Lc_b.$}
+
+\begin{frame}
+  \huge{The Form of $\Lc_b$}
+\end{frame}
+
+
+\section{The world's most convoluted proof of Frenkel's formula}
+
+
+\section{A selection of methods}
+
+\begin{frame}
+  
+\end{frame}
+
 
 \begin{frame}
 \structure{\begin{center}
