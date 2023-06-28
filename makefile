@@ -2,7 +2,7 @@
 
 NAME=kyototalk
 
-$(NAME).pdf: $(NAME).tex
+$(NAME).pdf: $(NAME).tex clean
 	pdflatex $<
 	pdflatex $<
 	pdflatex $<

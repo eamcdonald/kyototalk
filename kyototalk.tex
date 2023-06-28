@@ -147,7 +147,7 @@
 
 \def\qd{\,{\mathchar'26\mkern-12mu d}}
 
-
+\newcommand{\CR}{\mathrm{CR}}
    
    
    
@@ -175,9 +175,6 @@ Based on joint work with N.~Higson, S.~Liu, F.~Sukochev and D.~Zanin}
   And, most importantly, how do we prove things about it?
 \end{frame}
 
-\section{In the beginning...}
-
-
 \section{Frenkel's formula}
 
 \begin{frame}
@@ -185,24 +182,43 @@ Based on joint work with N.~Higson, S.~Liu, F.~Sukochev and D.~Zanin}
 \end{frame}
 
 \begin{frame}
-  Let $G$ be a connected, simply connected, compact group. There is the Casimir element, $\Delta_G \in \Uc(\gf).$
+  Let $G$ be a connected, simply connected, compact group, with Lie algebra $\gf$ having nondegenerate bilinear form $B.$
   
-  What is $\Tr(e^{t\Delta_G})$?
+  Specify a Cartan subalgebra $\tf \subset G$ and corresponding maximal abelian subgroup $T\subset G.$
+  We have the co-root lattice
+  \[
+    \CR = \{X \in \tf\;:\; \exp(X) = 1_G\}
+  \]
+  and the weight lattice 
+  \[
+  \CR^* = \{\lambda \in \tf^*\;:\; \lambda(X) \in \Itgr,\quad X \in \CR\}
+  \]
+  with specified positive subspace $\CR_+^*\subset \CR^*.$
   
+  There is the Casimir element, $\Delta_G \in \Uc(\gf).$
+   
+  What is $\Tr(e^{t\Delta_G})$? 
+\end{frame}
+
+\begin{frame}{What is $\Tr(e^{t\Delta_G})$}
   Some possible answers:
   \begin{enumerate}
     \item{} Spectral (Peter-Weyl) representation: we have
     \[
-        \Tr(e^{t\Delta_G}) = \sum_{\lambda\in CR^*_+} \left(\prod_{\alpha>0} \frac{\langle \alpha,\rho+\lambda\rangle}{\langle \alpha,\rho\rangle}\right)^2e^{-tB(\lambda+2\rho,\lambda)}
+        \Tr(e^{t\Delta_G}) = \sum_{\lambda\in CR^*_+} \left(\prod_{\alpha>0} \frac{B(\alpha,\rho+\lambda)}{B(\alpha,\rho)}\right)^2e^{-tB(\lambda+2\rho,\lambda)}
     \]
-    where $W_+$ is the weight lattice, $\prod_{\alpha>0}$ is the product over positive roots, $\rho$ is the Weyl element, and $B$ is the bilinear pairing on $\gf^*.$
+    where $\prod_{\alpha>0}$ is the product over positive roots, $\rho$ is the Weyl element.
     \item{} Minakshisundaram-Pleijel expansion: asymptotically, as $t\to 0,$ we have
     \[
         \Tr(e^{t\Delta_G}) \sim (4\pi t)^{-\frac{\mathrm{dim}(G)}{2}}(a_0+a_1t+a_2t^2+\cdots)
     \]
-    where $a_0, a_1, $ etc. are determined by the geometry of $G.$
+    where 
+    \[
+      a_n = \frac{\mathrm{Vol(G)}}{n!}(2\pi B(\rho,\rho))^{2n}.
+    \]
   \end{enumerate}
-  Is there another (more insightful) representation?
+  \pause
+  Is there a ``better" representation?
 \end{frame}
 
 \begin{frame}{Jacobi identity}
@@ -215,7 +231,6 @@ Based on joint work with N.~Higson, S.~Liu, F.~Sukochev and D.~Zanin}
     \Tr(e^{t\Delta_{\Circ}}) = \sum_{n\in \Itgr} e^{-tn^2}
   \]
   
-  
   Is there something similar for a general Lie group?
 \end{frame}
 
@@ -225,21 +240,25 @@ Based on joint work with N.~Higson, S.~Liu, F.~Sukochev and D.~Zanin}
     \Tr(\lambda(e^H)e^{t\Delta_G})
   \]
   where $H\in \tf,$ and $\lambda(e^H)$ is the left shift operator by $e^H\in G.$
-  \begin{theorem}[Frenkel (1984)]
+  \begin{theorem}[\'{E}skin (1964), Frenkel (1984)]
       If $H\in \tf$ is regular (i.e., $\alpha(H)\neq 0$ for all roots $\alpha$), then
-      \[
-          \Tr(\lambda(e^H)e^{t\Delta_G}) = \frac{\mathrm{Vol}(G)e^{4\pi^2t|\rho|^2}}{(4\pi t)^{\frac{\mathrm{dim}(G)}{2}}\sigma(H)}\sum_{\gamma \in CR} \left(\prod_{\alpha>0} \langle 2\pi \alpha,H+\gamma\rangle\right) e^{-\frac{1}{4t}|H+\gamma|^2} 
-      \]
+      \begin{align*}
+          &\Tr(\lambda(e^H)e^{t\Delta_G})\\
+          &= \frac{\mathrm{Vol}(G)e^{4\pi^2tB(\rho,\rho)^2}}{(4\pi t)^{\frac{\mathrm{dim}(G)}{2}}\sigma(H)}\sum_{\gamma \in CR} \left(\prod_{\alpha>0} \langle 2\pi \alpha,H+\gamma\rangle\right) e^{-\frac{1}{4t}B(H+\gamma,H+\gamma)^2} 
+      \end{align*}
       where $\sigma$ is the Weyl denominator.
   \end{theorem}
 \end{frame}
 
 \begin{frame}{Proof of Frenkel's formula}
-    Frenkel's formula is proved using the explicit spectral decomposition of $\Delta_G$ and the Weyl character formula. From these facts, we have
-    \[
-      \Tr(\lambda(e^H)e^{t\Delta_G}) = \frac{1}{\sigma(H)}\sum_{\lambda \in CR^*_+} \sum_{w \in W} \sgn(w)e^{w(\lambda+\rho)(H)}e^{-tB(\lambda+2\rho,\lambda)}
-    \]
-    Some rearrangement and Poisson's summation formula give the result.
+    Frenkel proved his formula using the explicit spectral decomposition of $\Delta_G$ and the Weyl character formula. From these facts, we have
+    \begin{align*}
+      &\Tr(\lambda(e^H)\rho(e^K)e^{t\Delta_G})\\ 
+      &= \sum_{\lambda \in CR^*_+} \frac{1}{\sigma(H)\sigma(K)}\left(\sum_{w \in W} \sgn(w)e^{w(\lambda+\rho)(H)}\right)\\
+      &\quad \cdot \left(\sum_{w\in W} \sgn(w)e^{w(\lambda+\rho)(K)}\right)e^{-tB(\lambda+2\rho,\lambda)}
+    \end{align*}
+    (here, $\rho$ is the right-regular representation).
+    Some rearrangement, Poisson's summation formula, and sending $K\to 0$ gives the result.
 \end{frame}
 
 
@@ -250,7 +269,7 @@ Based on joint work with N.~Higson, S.~Liu, F.~Sukochev and D.~Zanin}
 \begin{frame}{Section introduction}
   In this section, I will attempt to give a ``folkloric" story for the origins of the hypoelliptic Laplacian.
   
-  I am strongly indebetted to the paper of Choi--Takhtajan (2021).
+  I am strongly indebtted to the paper of Choi--Takhtajan (2021) for this explanation.
 \end{frame}
 
 \begin{frame}{The Hamiltonian-Lagrangian correspondence}
@@ -267,11 +286,11 @@ Based on joint work with N.~Higson, S.~Liu, F.~Sukochev and D.~Zanin}
 \begin{frame}{The Hamiltonian-Lagrangian correspondence}
   We are supposed to have something like the following:
   \begin{equation}
-    \Tr(e^{-t\Hc(x,-i\partial)}) = \int_{LX} e^{-\int_0^t \Lc(\gamma(s),\gamma'(s))\,ds} \Dc \gamma.
+    \Tr(e^{-t\Hc(x,-i\partial)}) = \int_{L_tX} e^{-\int_0^t \Lc(\gamma(s),\dot{\gamma}(s))\,ds} \Dc \gamma.
   \end{equation}
-  Here, $\Hc(x,-i\partial)$ is an operator on the Hilbert space $L_2(X)$ defined by some kind of quantisation of $\Hc,$ $LX$ is the space of loops, that is functions $S^1\to X,$ and ``$\Dc\gamma$" is some kind of measure on loop space.\\
+  Here, $\Hc(x,-i\partial)$ is an operator on the Hilbert space $L_2(X)$ defined by some kind of quantisation of $\Hc,$ $L_tX$ is the space of loops of ``time" $t,$ that is functions $\Rl/t\Itgr \to X,$ and ``$\Dc\gamma$" is some kind of measure on loop space.\\
   
-  
+  \pause
   Both sides of this formula are problematic, but the left-hand-side is a bit more accessible. 
 \end{frame}
 
@@ -288,7 +307,7 @@ Based on joint work with N.~Higson, S.~Liu, F.~Sukochev and D.~Zanin}
   \[
     \Tr(e^{\frac12 t\Delta_g}) = \int_{LX} e^{-\int_0^t \frac12 g_{\alpha,\beta}(\gamma(s))\dot{\gamma}^{\alpha}(s)\dot{\gamma}^\beta(s)\,ds}\, \Dc \gamma
   \]
-  where the integral on the right-hand side is rigorously defined as a limit of natural discrete approximations. See Anderson-Driver.
+  where the integral on the right-hand side is rigorously defined as a limit of discrete approximations. See Andersson--Driver (1998).
 \end{frame}
 
 \begin{frame}{Berline-Vergne localisation}
@@ -312,7 +331,7 @@ Based on joint work with N.~Higson, S.~Liu, F.~Sukochev and D.~Zanin}
     \[
       \int_Z \alpha = \int_Z \alpha e^{b\Vc},\quad b>0.
     \]
-    This is proved by showing that the right hand side is independent of $b,$ and then setting $b=0.$ The limit as $b\to\infty$ is computed using Laplace's method.    
+    This is proved by showing that the right hand side is independent of $b,$ and then setting $b=0.$ The limit as $b\to\infty$ is computed using Laplace's asymptotic formula.
 \end{frame}
 
 \begin{frame}{Bismut's dream}
@@ -320,7 +339,11 @@ Based on joint work with N.~Higson, S.~Liu, F.~Sukochev and D.~Zanin}
   \[
     \int_{LX} e^{-\int_0^t \Lc(\gamma(s),\dot{\gamma}(s))\,ds} \Dc\gamma
   \]
-  as an integral of a differential form over the infinite dimensional manifold $LX.$
+  as an integral of a differential form over the infinite dimensional manifold $L_tX.$
+  Note that $L_tX$ has a $\Circ$-action given by rotating around the loop.
+  \\
+  \pause
+  This theme was very popular in the 1980s -- it led ultimately to Getzler's proof of the local index formula.  
   \pause
   We could try to mimic the proof of Berline-Vergne by introducing a $1$-parameter perturbation of $\Lc,$ something like
   \[
@@ -332,7 +355,7 @@ Based on joint work with N.~Higson, S.~Liu, F.~Sukochev and D.~Zanin}
 \end{frame}
 
 \begin{frame}{Bismut's dream}
-  Doing Berline-Vergne in loop space is too difficult, the technicalities in making sense of the path integral are too great. 
+  Doing Berline-Vergne in loop space is a great idea but it's too difficult to attempt directly.
   
   But maybe, we can use the Hamiltonian-Lagrangian correspondence to replace incomprehensible loop space integrals with slightly more comprehensible operator traces.
   \begin{center}
@@ -346,9 +369,9 @@ Based on joint work with N.~Higson, S.~Liu, F.~Sukochev and D.~Zanin}
 \end{frame}
 
 \begin{frame}{The hypoelliptic Laplacian}
-  Let $G$ be a compact Lie group, and let $H\in \tf$ be regular. Through some combination of path integral computations, intuition, and guesswork, Bismut found a solution the preceding question.
-  \begin{theorem}
-    There is a differential operator $\Lc_{b,H},$ depending on a positive real parameter $b,$ acting on the space
+  Let $G$ be a compact Lie group, we consider $\Delta_G$ rather than the general $\Delta_g.$ Through some combination of path integral computations, intuition, and guesswork, Bismut found a solution the preceding question.
+  \begin{theorem}[Bismut (2011)]
+    Let $H\in \tf$ be regular. There is a differential operator $\Lc_{b,H},$ depending on a positive real parameter $b,$ acting on the space
     \[
       C^\infty(\gf\times G,\bigwedge^{\bullet}\gf)
     \]
@@ -376,6 +399,7 @@ Based on joint work with N.~Higson, S.~Liu, F.~Sukochev and D.~Zanin}
 \end{frame}
 
 \begin{frame}{Definition of $\Lc_b.$}
+  It would be nice to have a heuristic derivation of $\Lc_b$ that follows from the path integral computations, but I am not convinced that such a thing exists. Instead, let's take Bismut at his word and assert the following definition.
   \begin{definition}
     \[
       \Lc_b = (D+\frac1bQ)^2-D^2
@@ -398,7 +422,7 @@ Based on joint work with N.~Higson, S.~Liu, F.~Sukochev and D.~Zanin}
   \]
   which turns out to be
   \[
-    \Lc_b = \frac{1}{b^2}\sum_{j=1}^d y_j^2-\partial_{y_j}^2 + \frac{1}{b}\sum_{j=1}^dy_j\partial_{x_j} + \mathrm{matrix terms.}
+    \Lc_b = \frac{1}{b^2}\sum_{j=1}^d y_j^2-\partial_{y_j}^2 + \frac{1}{b}\sum_{j=1}^dy_j\partial_{x_j} + \text{matrix terms.}
   \]
 \end{frame}
 
@@ -406,6 +430,15 @@ Based on joint work with N.~Higson, S.~Liu, F.~Sukochev and D.~Zanin}
 
 \begin{frame}
   \huge{Analytic problems and their solutions}
+\end{frame}
+
+\begin{frame}
+  Analysing $\Lc_b,$ we can see that 
+  \begin{align*}
+    \Lc_b &= \frac{1}{b^2}\underbrace{\sum_{j=1}^d y_j^2-\partial_{y_j}^2}_{\text{Harmonic oscillator on } \gf}\\
+          &\;+ \frac{1}{b}\underbrace{\sum_{j=1}^d y_j\partial_{x_j}}_{\text{Generator of geodesic flow, identifying }TG=\gf\times G}\\
+          &\;+ \text{matrix terms.}
+  \end{align*}
 \end{frame}
 
 \begin{frame}{The problems we face}
