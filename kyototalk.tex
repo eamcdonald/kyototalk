@@ -239,7 +239,7 @@ Based on joint work with N.~Higson, S.~Liu, F.~Sukochev and D.~Zanin}
     \[
       \Tr(\lambda(e^H)e^{t\Delta_G}) = \frac{1}{\sigma(H)}\sum_{\lambda \in CR^*_+} \sum_{w \in W} \sgn(w)e^{w(\lambda+\rho)(H)}e^{-tB(\lambda+2\rho,\lambda)}
     \]
-    Some basic facts from representation theory and Poisson's summation formula give the proof.
+    Some rearrangement and Poisson's summation formula give the result.
 \end{frame}
 
 
@@ -308,13 +308,11 @@ Based on joint work with N.~Higson, S.~Liu, F.~Sukochev and D.~Zanin}
 \end{frame}
 
 \begin{frame}{Proof of Berline-Vergne localisation}
-    Berline-Vergne localisation can be proved in the following way. It is possible to find a differential form $\Vc \in \Omega^2(X)$ such that
+    Berline-Vergne localisation can be proved in the following way. It is possible to construct a differential form $\Vc \in \Omega^2(X)$ such that
     \[
       \int_Z \alpha = \int_Z \alpha e^{b\Vc},\quad b>0.
     \]
-    This is proved by showing that the right hand side is independent of $b,$ and then setting $b=0.$ The limit as $b\to\infty$
-    is computed using Laplace's method.
-    
+    This is proved by showing that the right hand side is independent of $b,$ and then setting $b=0.$ The limit as $b\to\infty$ is computed using Laplace's method.    
 \end{frame}
 
 \begin{frame}{Bismut's dream}
@@ -368,14 +366,144 @@ Based on joint work with N.~Higson, S.~Liu, F.~Sukochev and D.~Zanin}
   \huge{The Form of $\Lc_b$}
 \end{frame}
 
+\begin{frame}{Notation}
+  $G$ is a compact Lie group of dimension $d,$ and $\gf$ is its Lie algebra. Let $e_1,\ldots,e_d$ be an orthonormal basis of $\gf.$
+  
+  We will write the variables of $\gf\times G$ as $(y,x),$ and we have some clifford operators on $\bigwedge^{\bullet}\gf,$ denoted
+  \[
+    c(v) = v\wedge + \iota_v,\quad \widehat{c}(v) = v\wedge -\iota_v,\quad v \in \gf.
+  \]
+\end{frame}
+
+\begin{frame}{Definition of $\Lc_b.$}
+  \begin{definition}
+    \[
+      \Lc_b = (D+\frac1bQ)^2-D^2
+    \]
+  \end{definition}
+  where
+  \[
+    Q = \sum_{j=1}^d c(e_j)y_j-i\widehat{c}(e_j)\partial_{y_j}
+  \]
+  and 
+  \[
+    D = \sum_{j=1}^d -ic(e_j)\partial_{x_j}+\frac{1}{12}f^j_{k,l}c(e_j)c(e_k)c(e_\ell)
+  \]
+\end{frame}
+
+\begin{frame}{Structure of $\Lc_b.$}
+  Expanding out the definitions, we get
+  \[
+    \Lc_b = \frac{1}{b^2}Q^2+\frac{1}{b}(QD+DQ)
+  \]
+  which turns out to be
+  \[
+    \Lc_b = \frac{1}{b^2}\sum_{j=1}^d y_j^2-\partial_{y_j}^2 + \frac{1}{b}\sum_{j=1}^dy_j\partial_{x_j} + \mathrm{matrix terms.}
+  \]
+\end{frame}
+
+\section{Analytic problems and their solutions}
+
+\begin{frame}
+  \huge{Analytic problems and their solutions}
+\end{frame}
+
+\begin{frame}{The problems we face}
+  The main analytic difficulties we need to deal with are proving \emph{Schauder estimates}
+  \[
+    \|u\|_{s+2} \lesssim \|\Lc_bu\|_s+\|u\|_s,\quad \|v\|_{s+2} \lesssim \|(\partial_t-\Lc_b)v\|_s+\|v\|_s
+  \]
+  and \emph{heat kernel estimates}
+  \[
+    \exp(-t\Lc_b)(p,q) \leq \text{(???)}
+  \]
+\end{frame}
+
 
 \section{The world's most convoluted proof of Frenkel's formula}
 
+\begin{frame}
+  \huge{Section 4: The world's most convoluted proof of Frenkel's formula}
+\end{frame}
 
-\section{A selection of methods}
+\subsection{As $b\to 0.$}
+
+\begin{frame}{The limit as $b\to 0.$}
+    In some sense, we are supposed to have
+    \[
+      \exp(-t\Lc_b)\rightarrow \exp(t\Delta_G).
+    \]
+    But how does this actually work? After all, they act on different spaces.
+\end{frame}
+
+\begin{frame}{The projection onto $\ker(Q).$}
+  In order to understand how an operator on $L_2(\gf\times G,\bigwedge^{\bullet}\gf)$ converges to an operator on
+  $L_2(G),$ we need to understand how $L_2(G)$ is a subspace of $L_2(\gf\times G,\bigwedge^{\bullet}\gf).$
+  
+  \textbf{Solution}: we use a Gaussian function on the $\gf$ fibre. 
+  This is like embedding $L_2(\Circ)$ isometrically into $L_2(\Circ\times \Rl)$ by mapping $f(x)$ to $f(x)e^{-\pi y^2}.$
+  
+  \begin{definition}
+    Recall that $Q$ is the Witten Dirac,
+    \[
+      Q = \sum_{j=1}^d c(e_j)y_j - \widehat{c}(e_j)\partial_{y_j}.
+    \]
+    Let $P$ be the kernel projection of $Q.$
+  \end{definition}
+  We will embed $L_2(G)$ into $L_2(\gf\times G,\bigwedge^{\bullet}\gf)$ by
+  \[
+    L_2(G)\approx  PL_2(\gf\times G,\bigwedge^{\bullet}\gf)P.
+  \]
+\end{frame}
+
+\begin{frame}{The $2\times 2$ matrix trick}
+  We want to prove that $\exp(-t\Lc_b)$ converges to $P\exp(t\Delta_G)P.$ Actually it is simpler to work with resolvents, and prove that
+  \[
+    (\lambda+\Lc_b)^{-1} \rightarrow P(\lambda-\Delta_G)^{-1}P
+  \]
+  for a suitably large set of $\lambda\in \Cplx.$ By some functional calculus, this is equivalent. 
+  
+  \textbf{Idea:} write the resolvent as a $2\times 2$ matrix.
+\end{frame}
+
+\subsection{As $b\to \infty.$}
 
 \begin{frame}
+  \huge{As $b\to\infty$}
+\end{frame}
+
+\begin{frame}
+  The much more challenging problem we face is to understand what happens to $\Str(e^{-t\Lc_b})$ as $b\to\infty.$
+  Note that:
+  \begin{enumerate}
+    \item{} Unlike with $b\to 0,$ we have to take the supertrace first in order that the limit exists. This is analogous to the local index theorem. 
+    \item{} This argument will be complicated, in part, because we have to do a simultaneous rescaling of the spatial and clifford variables.
+    \item{} It is not possible to compute the limit of $\Str(e^{-t\Lc_b})$ directly, instead we need to introduce a shift.
+  \end{enumerate}
+\end{frame}
+
+\begin{frame}{Techniques}
+  Going into all the details with the rescaling of variables is too much to attempt here.... Instead I will briefly indicate what we're aiming for.
   
+  What we expect is that
+  \[
+    \lim_{b\to\infty}\Str(e^{-t\Lc_{b,H}}) = \text{A sum over coweights of }G.
+  \]
+  The left hand side is an integral over the kernel of the operator. How does an integral converge to a sum?
+  
+\end{frame}
+
+\section{Conclusions}
+
+\begin{frame}{What next?}
+  We have succeeded in proving Frenkel's formula by replacing some elementary representation theory and Poisson's summation formula by the most convoluted arguments imaginable. \\
+  
+  We can all agree that having new proofs of old results is worthwhile in itself, but...
+  \textbf{What is the point of all this?}
+  \begin{enumerate}
+    \item{} Bismut's proof is \emph{totally different} to Frenkel's proof. Strikingly, \emph{no representation theory is needed}. We didn't even need the theorem of the highest weight. The coweight lattice turned up in the sum for completely geometric reasons.
+    \item{} Bismut eventually extended his arguments to give totally new results, including his formulas for the heat kernel on symmetric spaces.
+  \end{enumerate}
 \end{frame}
 
 
