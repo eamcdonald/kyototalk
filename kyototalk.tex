@@ -175,6 +175,8 @@ Based on joint work with N.~Higson, S.~Liu, F.~Sukochev and D.~Zanin}
   And, most importantly, how do we prove things about it?
 \end{frame}
 
+\section{The primordial history}
+
 \section{Frenkel's formula}
 
 \begin{frame}
@@ -240,7 +242,7 @@ Based on joint work with N.~Higson, S.~Liu, F.~Sukochev and D.~Zanin}
     \Tr(\lambda(e^H)e^{t\Delta_G})
   \]
   where $H\in \tf,$ and $\lambda(e^H)$ is the left shift operator by $e^H\in G.$
-  \begin{theorem}[\'{E}skin (1964), Frenkel (1984)]
+  \begin{theorem}[\`{E}skin (1964), Frenkel (1984)]
       If $H\in \tf$ is regular (i.e., $\alpha(H)\neq 0$ for all roots $\alpha$), then
       \begin{align*}
           &\Tr(\lambda(e^H)e^{t\Delta_G})\\
@@ -248,6 +250,8 @@ Based on joint work with N.~Higson, S.~Liu, F.~Sukochev and D.~Zanin}
       \end{align*}
       where $\sigma$ is the Weyl denominator.
   \end{theorem}
+  \pause
+  We can also take $H\to 0,$ but the resulting expression for $\Tr(e^{t\Delta_G})$ is more complicated, see \`{E}skin's paper.
 \end{frame}
 
 \begin{frame}{Proof of Frenkel's formula}
@@ -259,6 +263,30 @@ Based on joint work with N.~Higson, S.~Liu, F.~Sukochev and D.~Zanin}
     \end{align*}
     (here, $\rho$ is the right-regular representation).
     Some rearrangement, Poisson's summation formula, and sending $K\to 0$ gives the result.
+\end{frame}
+
+\begin{frame}{Remarks on Frenkel's formula}
+If we examine Frenkel's formula
+\begin{align*}
+ \sum_{\lambda \in CR^*_+} \frac{1}{\sigma(H)\sigma(K)}\left(\sum_{w \in W} \sgn(w)e^{w(\lambda+\rho)(H)}\right)\\
+      &\quad \cdot \left(\sum_{w\in W} \sgn(w)e^{w(\lambda+\rho)(K)}\right)e^{-tB(\lambda+2\rho,\lambda)}\\
+      &=\frac{\mathrm{Vol}(G)e^{4\pi^2tB(\rho,\rho)^2}}{(4\pi t)^{\frac{\mathrm{dim}(G)}{2}}\sigma(H)}\sum_{\gamma \in CR} \left(\prod_{\alpha>0} \langle 2\pi \alpha,H+\gamma\rangle\right) e^{-\frac{1}{4t}B(H+\gamma,H+\gamma)^2}
+\end{align*}
+We can see that a sum over the \emph{weight lattice} is converted into a sum over the \emph{coroot lattice}. The exponential $\exp(-tx^2)$ is converted to $\exp(-\frac{1}{t}x^2)$ (as if this were a Fourier transform).
+\end{frame}
+
+\begin{frame}{Looking to Bismut}
+Bismut gave a new proof of Frenkel's formula, as the
+\begin{align*}
+          &\Tr(\lambda(e^H)e^{t\Delta_G})\\
+          &= \frac{\mathrm{Vol}(G)e^{4\pi^2tB(\rho,\rho)^2}}{(4\pi t)^{\frac{\mathrm{dim}(G)}{2}}\sigma(H)}\sum_{\gamma \in \CR} \left(\prod_{\alpha>0} \langle 2\pi \alpha,H+\gamma\rangle\right) e^{-\frac{1}{4t}B(H+\gamma,H+\gamma)^2}.
+\end{align*}
+But it differs in some essential ways from Frenkel's proof:
+\begin{itemize}
+  \item{} Bismut does not use the Peter-Weyl decomposition of $G.$ The theorem of the highest weight is not needed! There is no representation theory of $G.$
+  \item{} The coroot lattice $\CR$ of $G$ emerges in a purely geometric way, rather than as the dual of the weight lattice.
+\end{itemize}
+
 \end{frame}
 
 
@@ -413,6 +441,7 @@ Based on joint work with N.~Higson, S.~Liu, F.~Sukochev and D.~Zanin}
   \[
     D = \sum_{j=1}^d -ic(e_j)\partial_{x_j}+\frac{1}{12}f^j_{k,l}c(e_j)c(e_k)c(e_\ell)
   \]
+  is the \emph{Kostant Dirac operator} on $G.$
 \end{frame}
 
 \begin{frame}{Structure of $\Lc_b.$}
@@ -439,6 +468,26 @@ Based on joint work with N.~Higson, S.~Liu, F.~Sukochev and D.~Zanin}
           &\;+ \frac{1}{b}\underbrace{\sum_{j=1}^d y_j\partial_{x_j}}_{\text{Generator of geodesic flow, identifying }TG=\gf\times G}\\
           &\;+ \text{matrix terms.}
   \end{align*}
+  This operator is \emph{not elliptic} on $\gf\times G,$ but it is hypoelliptic. We are also interested in the heat operator
+  \[
+      \widehat{\Lc}_b = \partial_t-\Lc_b.
+  \]
+\end{frame}
+
+\begin{frame}{Scalar part of $\Lc_b.$}
+  Let's concentrate on the scalar part of $\Lc_b,$
+  \[
+    L_b =\frac{1}{b^2}\sum_{j=1}^d y_j^2-\partial_{y_j}^2 + \frac{1}{b}\sum_{j=1}^dy_j\partial_{x_j},\quad (x,y) \in \gf_y\times G_x.
+  \]
+  Here $\partial_{y_j}$ are the (commuting) derivatives on $\gf$ and $\partial_{x_j}$ are the noncommuting derivatives on $G.$
+\end{frame}
+
+\begin{frame}{A toy model}
+  Life would be a lot easier if the $\partial_{x_j}$ terms were commuting, consider the operator
+  \[
+    K_b := \frac{1}{b^2}\sum_{j=1}^d y_j^2-\partial_{y_j}^2 + \frac{1}{b}\sum_{j=1}^dy_j\partial_{x_j},\quad (x,y) \in \gf_y\times \gf_x.
+  \]
+  where now the $\partial_{x_j}'$ commute.
 \end{frame}
 
 \begin{frame}{The problems we face}
@@ -523,7 +572,6 @@ Based on joint work with N.~Higson, S.~Liu, F.~Sukochev and D.~Zanin}
     \lim_{b\to\infty}\Str(e^{-t\Lc_{b,H}}) = \text{A sum over coweights of }G.
   \]
   The left hand side is an integral over the kernel of the operator. How does an integral converge to a sum?
-  
 \end{frame}
 
 \section{Conclusions}
