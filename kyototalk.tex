@@ -135,6 +135,9 @@
 \newcommand{\Ti}{\mathcal{T}}
 
 
+\DeclareMathOperator{\Ext}{\mathsf{\Lambda}}
+
+
 \def\Xint#1{\mathchoice
 {\XXint\displaystyle\textstyle{#1}}%
 {\XXint\textstyle\scriptstyle{#1}}%
@@ -274,13 +277,12 @@ We can see that a sum over the \emph{weight lattice} is converted into a sum ove
 \end{frame}
 
 \begin{frame}{Looking to Bismut}
-Bismut gave a new proof of Frenkel's formula, which is really a lot more complicated than the original proof. But it differs in some essential ways from Frenkel's proof:
+Bismut gave a new proof of Frenkel's formula, which is really a lot more complicated than Frenkel's proof. But it differs in some essential ways:
 \begin{itemize}
-  \item{} Bismut does not use the Peter-Weyl decomposition of $G.$ The theorem of the highest weight is not needed! The proof involves very little information from the representation theory of $G.$
+  \item{} Bismut does not use the Peter-Weyl decomposition of $G.$ The proof involves very little information from the representation theory of $G.$
   \item{} The coroot lattice $\CR$ of $G$ emerges in a purely geometric way, rather than as the dual of the weight lattice.
 \end{itemize}
 \end{frame}
-
 
 \begin{frame}
     \huge{Section 2: The Primordial History, or, the Duistermaat--Heckman localisation formula}
@@ -363,21 +365,21 @@ Bismut gave a new proof of Frenkel's formula, which is really a lot more complic
 \begin{frame}{Bismut's dream}
   We would like to compute $\Tr(e^{t\Delta_g})$ by considering
   \[
-    \int_{LX} e^{-t\int_0^1 \frac12 g_{\alpha,\beta}(\gamma(s)\dot{\gamma}^{\alpha}(s)\dot{\gamma}^\beta(s))\,ds} \Dc\gamma
+    \int_{LX} e^{-t\int_0^1 \frac12 g_{\alpha,\beta}(\gamma(s))\dot{\gamma}^{\alpha}(s)\dot{\gamma}^\beta(s)\,ds} \Dc\gamma
   \]
   as an integral of a differential form over the infinite dimensional manifold $LX.$
   Note that $LX$ has a $\Circ$-action given by rotating around the loop.
   \\
   There are reasons to think that this should be a Hamiltonian action, with Hamiltonian function
   \[
-  \int_0^1 \frac12 g_{\alpha,\beta}(\gamma(s)\dot{\gamma}^{\alpha}(s)\dot{\gamma}^\beta(s))\,ds
+  \int_0^1 \frac12 g_{\alpha,\beta}(\gamma(s))\dot{\gamma}^{\alpha}(s)\dot{\gamma}^\beta(s)\,ds
   \]
   \pause
   This theme was very popular in the 1980s -- it led ultimately to Getzler's proof of the local index formula.  
   \pause
-  We could try to mimic the proof of Berline-Vergne by introducing a $1$-parameter perturbation of $\Lc,$ something like
+  We could try to mimic the proof of Duistermaat--Heckman by introducing a $1$-parameter perturbation of $\Lc,$ something like
   \[
-      \int_{L_tX} e^{-\int_0^t \Lc(\gamma(s),\dot{\gamma}(s))+b\Vc\,ds} \Dc\gamma
+      \int_{LX} e^{-t\int_0^1 \Lc(\gamma(s),\dot{\gamma}(s))+b\Vc\,ds} \Dc\gamma
   \]
   where $b>0,$ and computing the limit as $b\to\infty.$
   \pause
@@ -403,7 +405,7 @@ Bismut gave a new proof of Frenkel's formula, which is really a lot more complic
   \begin{theorem}[Bismut (2011)]
     Let $H\in \tf$ be regular. There is a differential operator $\Lc_{b},$ depending on a positive real parameter $b,$ acting on the space
     \[
-      C^\infty(\gf\times G,\bigwedge^{\bullet}\gf)
+      C^\infty(\gf\times G,\Ext^\bullet\gf)
     \]
     such that for $H \in \tf$ we have
     \[
@@ -423,7 +425,7 @@ Bismut gave a new proof of Frenkel's formula, which is really a lot more complic
 \begin{frame}{Notation}
   $G$ is a compact Lie group of dimension $d,$ and $\gf$ is its Lie algebra with positive-definite bilinear form $B$. Let $e_1,\ldots,e_d$ be an orthonormal basis of $\gf.$
   
-  We will write the variables of $\gf\times G$ as $(y,x),$ and we have Clifford operators on $\bigwedge^{\bullet}\gf,$ denoted
+  We will write the variables of $\gf\times G$ as $(y,x),$ and we have Clifford operators on $\Ext^{\bullet}\gf,$ denoted
   \[
     c(v) = v\wedge + \iota_v,\quad \widehat{c}(v) = v\wedge -\iota_v,\quad v \in \gf.
   \]
@@ -460,96 +462,39 @@ Bismut gave a new proof of Frenkel's formula, which is really a lot more complic
   \[
     \Lc_b = \frac{1}{b^2}\sum_{j=1}^d y_j^2-\partial_{y_j}^2 + \frac{1}{b}\sum_{j=1}^dy_j\partial_{x_j} + \text{matrix terms.}
   \]
+  \pause
+  This operator satisfies H\"ormander's condition, and is therefore hypoelliptic.
 \end{frame}
 
-\section{Section 4: Analytic problems and their solutions}
+
+\section{Section 4: the world's most convoluted proof of Frenkel's formula}
 
 \begin{frame}
-  \huge{Analytic problems and their solutions}
+  \huge{Section 4: The world's most convoluted proof of Frenkel's formula}
 \end{frame}
 
-\begin{frame}
-  What we want to do is to show the following three facts:
+\begin{frame}{The main tasks}
+  Ultimately, we want to show the following facts:
   \begin{itemize}
     \item{} $\lim_{b\to 0} e^{-t\Lc_b} = e^{-tD^2}$ \emph{in the correct sense},
-    \item{} $\lim_{b\to 0} \Str(\lambda(e^H)e^{-t\Lc_b}) = \text{Frenkel's formula.}$
+    \item{} $\lim_{b\to \infty} \Str(\lambda(e^H)e^{-t\Lc_b}) = \text{Frenkel's formula.}$
   \end{itemize}
-  Interestingly, the presence of $H$ is \emph{essential} in the second point.
-\end{frame}
-
-\begin{frame}{The problems we face}
-  The main analytic difficulties we need to deal with are proving \emph{Schauder estimates}
-  \[
-    \|u\|_{s+2} \lesssim \|\Lc_bu\|_s+\|u\|_s,\quad \|v\|_{s+2} \lesssim \|(\partial_t-\Lc_b)v\|_s+\|v\|_s
-  \]
-  and \emph{heat kernel estimates}
-  \[
-    |\exp(-t\Lc_b)(p,q)| \leq \text{(???)}
-  \]
-\end{frame}
-
-\begin{frame}{Obtaining kernel estimates}
-  The traditional way to obtain estimates on a heat kernel $\exp(-tP)(p,q)$ is to combine a \emph{Schauder estimate}
-  \[
-    \|\exp(-tP)\|_{H^{-s}\to H^s} \lesssim t^{-K}
-  \]
-  for some scale of Sobolev spaces $\{H^s\}_{s\in \Rl}$ and all sufficiently large $s,$ with an $L_2$-\emph{estimate}:
-  \[
-    \|M_{\psi}\exp(-tP)M_{\phi}\|_{L_2\to L_2} \lesssim \exp(-\frac1t \mathrm{dist}(\mathrm{supp}(\phi),\mathrm{supp}(\psi)))
-  \]
-  for some bump functions $\phi$ and $\psi.$
-\end{frame}
-
-\begin{frame}
-  Analysing $\Lc_b,$ we can see that
-  \begin{align*}
-    \Lc_b &= \frac{1}{b^2}\underbrace{\sum_{j=1}^d y_j^2-\partial_{y_j}^2}_{\text{Harmonic oscillator on } \gf}\\
-          &\;+ \frac{1}{b}\underbrace{\sum_{j=1}^d y_j\partial_{x_j}}_{\text{Generator of geodesic flow, identifying }TG=\gf\times G}\\
-          &\;+ \text{matrix terms.}
-  \end{align*}
-  This operator is \emph{not elliptic} on $\gf\times G,$ but it is hypoelliptic. We are also interested in the heat operator
-  \[
-      \widehat{\Lc}_b = \partial_t-\Lc_b.
-  \]
-\end{frame}
-
-\begin{frame}{Scalar part of $\Lc_b.$}
-  Let's concentrate on the scalar part of $\Lc_b,$
-  \[
-    L_b =\frac{1}{b^2}\sum_{j=1}^d y_j^2-\partial_{y_j}^2 + \frac{1}{b}\sum_{j=1}^dy_j\partial_{x_j},\quad (x,y) \in \gf_y\times G_x.
-  \]
-  Here $\partial_{y_j}$ are the (commuting) derivatives on $\gf$ and $\partial_{x_j}$ are the noncommuting derivatives on $G.$
-\end{frame}
-
-\begin{frame}{A toy model}
-  Life would be a lot easier if the $\partial_{x_j}$ terms were commuting, consider the operator
-  \[
-    K_b := \frac{1}{b^2}\sum_{j=1}^d y_j^2-\partial_{y_j}^2 + \frac{1}{b}\sum_{j=1}^dy_j\partial_{x_j},\quad (x,y) \in \gf_y\times \gf_x.
-  \]
-  where now the $\partial_{x_j}'$ commute!
   \pause
-  This is a Kolmogorov-type operator, and we can understand it very well using the theory of nilpotent Lie groups.
+  Of course, to state these questions we need to determine if $\exp(-t\Lc_b)$ even exists and belongs to the trace class.
 \end{frame}
 
-\section{The world's most convoluted proof of Frenkel's formula}
-
-\begin{frame}
-  \huge{Section 5: The world's most convoluted proof of Frenkel's formula}
-\end{frame}
-
-\subsection{As $b\to 0.$}
 
 \begin{frame}{The limit as $b\to 0.$}
     In some sense, we are supposed to have
     \[
-      \exp(-t\Lc_b)\rightarrow \exp(t\Delta_G).
+      \exp(-t\Lc_b)\rightarrow \exp(-tD^2).
     \]
     But how does this actually work? After all, they act on different spaces.
 \end{frame}
 
 \begin{frame}{The projection onto $\ker(Q).$}
-  In order to understand how an operator on $L_2(\gf\times G,\bigwedge^{\bullet}\gf)$ converges to an operator on
-  $L_2(G),$ we need to understand how $L_2(G)$ is a subspace of $L_2(\gf\times G,\bigwedge^{\bullet}\gf).$
+  In order to understand how an operator on $L_2(\gf\times G,\Ext^{\bullet}\gf)$ converges to an operator on
+  $L_2(G),$ we need to understand how $L_2(G)$ is a subspace of $L_2(\gf\times G,\Ext^{\bullet}\gf).$
 
   \textbf{Solution}: we use a Gaussian function on the $\gf$ fibre.
   This is like embedding $L_2(\Circ)$ isometrically into $L_2(\Circ\times \Rl)$ by mapping $f(x)$ to $f(x)e^{-\pi y^2}.$
@@ -561,9 +506,10 @@ Bismut gave a new proof of Frenkel's formula, which is really a lot more complic
     \]
     Let $P$ be the kernel projection of $Q.$
   \end{definition}
-  We will embed $L_2(G)$ into $L_2(\gf\times G,\bigwedge^{\bullet}\gf)$ by
+  It happens that $P$ is one-dimensional, with image a Gaussian function on the $\gf$ coordinates of $\gf\times G.$
+  We will embed $L_2(G)$ into $L_2(\gf\times G,\Ext^{\bullet}\gf)$ by identifying $L_2(G)$ with
   \[
-    L_2(G)\approx  PL_2(\gf\times G,\bigwedge^{\bullet}\gf)P.
+      PL_2(\gf\times G,\Ext^{\bullet}\gf).
   \]
 \end{frame}
 
@@ -580,19 +526,13 @@ Bismut gave a new proof of Frenkel's formula, which is really a lot more complic
 \begin{frame}{The $2\times 2$ matrix trick}
   Writing $(\lambda+\Lc_b)$ on $L_2(\gf\times G)$ with respect to the decomposition $\mathrm{im}(P)\oplus \mathrm{ker}(P),$ we have
   \[
-      \lambda+\Lc_b = \begin{pmatrix} \lambda & -\frac1bQD \\ -\frac1bDQ \\ \lambda - \frac{1}{b^2}Q^2-\frac{1}{b}(QD+DQ)  \end{pmatrix}.
+      \lambda+\Lc_b = \begin{pmatrix} \lambda & -\frac1bQD \\ -\frac1bDQ & \lambda - \frac{1}{b^2}Q^2-\frac{1}{b}(QD+DQ)  \end{pmatrix}.
   \]
   Using the formula for the inverse of a $2\times 2$ block matrix, we get
   \[
-    \lim_{b\to \infty} (\lambda-\Lc_b)^{-1} = \begin{pmatrix} (\lambda-D^2)^{-1} & 0 \\ 0 & 0\end{pmatrix}.
+    \lim_{b\to \infty} (\lambda-\Lc_b)^{-1} = \begin{pmatrix} (\lambda-D^2)^{-1} & 0 \\ 0 & 0\end{pmatrix}
   \]
-  In some operator topology.
-\end{frame}
-
-\subsection{As $b\to \infty.$}
-
-\begin{frame}
-  \huge{As $b\to\infty$}
+  in some operator topology.
 \end{frame}
 
 \begin{frame}
@@ -600,32 +540,162 @@ Bismut gave a new proof of Frenkel's formula, which is really a lot more complic
   Note that:
   \begin{enumerate}
     \item{} Unlike with $b\to 0,$ we have to take the supertrace first in order that the limit exists. This is analogous to the local index theorem.
-    \item{} This argument will be complicated, in part, because we have to do a simultaneous rescaling of the spatial and clifford variables.
-    \item{} It is not possible to compute the limit of $\Str(e^{-t\Lc_b})$ directly, instead we need to introduce a shift.
+    \item{} This argument will be complicated, in part, because we have to do a simultaneous rescaling of the spatial and Clifford variables.
+    \item{} It is not possible to compute the limit of $\Str(e^{-t\Lc_b})$ in general, we need to introduce $\lambda(e^H).$
   \end{enumerate}
 \end{frame}
 
-\begin{frame}{Techniques}
+\begin{frame}{The $b\to\infty$ argument}
   Going into all the details with the rescaling of variables is too much to attempt here.... Instead I will briefly indicate what we're aiming for.
 
   What we expect is that
   \[
-    \lim_{b\to\infty}\Str(e^{-t\Lc_{b,H}}) = \text{A sum over coweights of }G.
+    \lim_{b\to\infty}\Str(\lambda(e^H)e^{-t\Lc_{b}}) = \text{A sum over coroots of }G.
   \]
   The left hand side is an integral over the kernel of the operator. How does an integral converge to a sum?
 \end{frame}
 
-\begin{frame}{Techniques}
-  \begin{theorem}
-    Let $\phi_t$ be the geodesic flow. We have
+\begin{frame}{The $b\to\infty$ argument}
+  Let $e$ be the identity element of $G.$ We have
+  \[
+      \Str(e^{-t\Lc_b}) = \mathrm{Vol}(G)\int_{\gf} \mathrm{str}(\exp(-t\Lc_{b})((e,Y),(e,Y)))\,dY.
+  \]
+  (I am ignoring $\lambda(e^H)$ for now.)
+  First, there is a (quite subtle!) change of variables and Getzler rescaling of the Clifford terms. There is an operator $P_{b},$ which I will not define, such that
+  \[
+      \mathrm{str}(e^{-t\Lc_b}) = \mathrm{str}(e^{-tP_{b}})
+  \]
+\end{frame}
+
+\begin{frame}{The $b\to\infty$ argument}
+  \begin{theorem}[(approximate)]
+    Let $\phi_t$ be the geodesic flow. We have something like
     \[
-      |\exp(-tP_b)((e,Y),(e,Y))| \lesssim \exp(-\frac{\|Y\|^2}{tb^4})\exp(-\frac{1}{t})
+      |\exp(-tP_{b})((e,Y),(e,Y))| \lesssim \exp(-\frac{c}{t}\mathrm{dist}((e,Y),\phi_t(e,Y))^2).
     \]
   \end{theorem}
+  So, the kernel will be small away from those points $Y\in \gf$ such that $\phi_t(e,Y) =(e,Y).$
+  \pause
+  If $Y \in \tf,$ these are precisely the co-roots!\pause
+  It happens that the $\lambda(e^H)$ term that I ignored is essential for localising the integral to $\tf.$
+\end{frame}
+
+\begin{frame}
+  \includegraphics[width=90mm]{spikes.png}
+\end{frame}
+
+\begin{frame}
+  \includegraphics[width=90mm]{dots.png}
+\end{frame}
+
+\begin{frame}{The plan for the argument}
+  Somehow, this is all supposed to come together to deliver a new proof of Frenkel's formula.
 \end{frame}
 
 
-\section{Conclusions}
+\section{Section 5: Analytic problems and their solutions}
+
+\begin{frame}
+  \huge{Section 5: Analytic problems and their solutions}
+\end{frame}
+
+\begin{frame}{The problems we face}
+  The main analytic difficulties we need to deal with are proving \emph{subelliptic estimates}
+  \[
+    \|u\|_{s+\varepsilon} \lesssim \|\Lc_bu\|_s+\|u\|_s,\quad \|v\|_{s+\varepsilon} \lesssim \|(\partial_t-\Lc_b)v\|_s+\|v\|_s
+  \]
+  where $\|\cdot\|_{s}$ is a scale of Sobolev spaces on $\gf\times G$ or $\gf\times G\times \Rl.$
+
+  These are needed to prove that the exponential exists is at least trace-class, and also to establish the regularity of the kernel of $\exp(-t\Lc_b).$
+\pause
+
+  We also need some way to obtain estimates for
+  \[
+    |\exp(-tP_{b})((e,Y),(e,Y))|
+  \]
+  which exhibit the desired concentration on the co-roots. I will concentrate on this latter problem.
+\end{frame}
+
+\begin{frame}{The method of Gaffney and G\aa rding}
+  I will illustrate the method we have with a very simple case: consider a diffusion operator
+  \[
+      K = \sum_{j} X_j^2
+  \]
+  where the $X_j$'s are antisymmetric vector fields satisfying the H\"ormander condition on some open set $U\subset \Rl^N.$
+  \pause
+  I will sketch out an argument that for $p,q\in U$ we have
+  \[
+        \exp(tK)(p,q) \lesssim \exp(-\frac{c}{t}\mathrm{dist}_{cc}(p,q)^2)
+  \]
+  where $\mathrm{dist}_{cc}$ is the Carnot-Caratheodory distance defined by $\{X_j\}.$
+\end{frame}
+
+\begin{frame}{Energy methods}
+Let $u_0 \in L_2(U),$ and $u_t := \exp(tK)u_0.$ A simple computation yields the following:
+\begin{lemma}
+    Let $\phi \in C^\infty(U).$ We have
+    \[
+        \frac{d}{dt}\|\phi u_t\|^2 \leq 2\sum_j \|X_j(\phi)u_t\|^2.
+    \]
+\end{lemma}
+Gaffney and G\aa rding's argument is to choose $\phi$ in an ingenious way.
+\end{frame}
+
+\begin{frame}{The ingenious choice of $\phi.$}
+In particular, for $\phi = \exp(s\psi)$ where $s$ is a parameter to be chosen later, we have
+\[
+    \frac{d}{dt}\|\exp(s\psi)u_t\|^2 \leq 2s^2\|\exp(s\psi)u_t\|^2\left(\sum_{j}\|X_j(\psi)\|_{\infty}^2\right).
+\]
+By Gronwall's inequality, it follows that
+\[
+    \|\exp(s\psi)u_t\| \leq \|\exp(s\psi)u_0\|\exp(s^2t^2\sum_j \|X_j(\psi)\|_\infty^2).
+\]
+\end{frame}
+
+\begin{frame}{The ingenious choice of $\phi.$}
+Now select smooth functions $\nu$ and $\mu$ such that $u_0 = \nu u_0$, $\exp(s\psi)\nu = \nu$ and $\exp(s\psi)\mu = \exp(s)\mu.$
+It follows that
+\[
+    \|\mu u_t\| = \exp(-s)\|\exp(s\psi)\mu u_t\| \leq \|\mu\|_\infty\exp(-s+s^2tk^2)\|\nu u_0\|.
+\]
+here,
+\[
+    k^2 = \sum_j \|X_j(\psi)\|_\infty^2.
+\]
+If we select $s = \frac{1}{2tk^2},$ this minimises $s^2tk^2-s$, and we get
+\[
+    \|\mu u_t\| \leq \exp(-\frac{1}{4t}k^{-2})\|u_0\|.
+\]
+\end{frame}
+
+\begin{frame}
+The infimum of $k$ is equivalent to one over the Carnot--Caratheodory distance between the supports of $\nu$ and $\mu.$ Hence,
+\[
+    \|\mu\exp(tK)\nu\|_{L_2\to L_2} \leq \exp(-\frac{d^2}{4t})\|\mu\|\|\nu\|.
+\]
+where $d$ is the Carnot--Caratheodory distance between the supports of $\nu$ and $\mu.$
+\end{frame}
+
+\begin{frame}{Complex interpolation}
+From the $L_2$-estimate and an argument using Sobolev embedding and hypoellipticity, we arrive at
+\[
+    \exp(tK)(p,q) \lesssim \exp(-\frac{c}{t}\mathrm{dist}_{cc}(p,q)^2).
+\]
+\end{frame}
+
+\begin{frame}{Kernel bounds with drift}
+    Something much more interesting happens if we instead analyse an operator like
+    \[
+        K = \sum_{j} X_j^2 + Z
+    \]
+    where $Z$ is a new vector field. We can still do the argument, but we need to choose $\phi$ which moves along with the flow of $Z.$ This is how we arrive at the ``sub-Gaussian bounds with flow" needed for the concentration of the kernel of $\exp(-tP_b)$ on the co-roots.
+\end{frame}
+
+\section{Section 6: Conclusions}
+
+\begin{frame}
+  \Huge{Section 6: Conclusions}
+\end{frame}
 
 \begin{frame}{What next?}
   We have succeeded in proving Frenkel's formula by replacing some elementary representation theory and Poisson's summation formula by the most convoluted arguments imaginable. \\
@@ -633,7 +703,7 @@ Bismut gave a new proof of Frenkel's formula, which is really a lot more complic
   We can all agree that having new proofs of old results is worthwhile in itself, but...
   \textbf{What is the point of all this?}
   \begin{enumerate}
-    \item{} Bismut's proof is \emph{totally different} to Frenkel's proof. Strikingly, \emph{no representation theory is needed}. We didn't even need the theorem of the highest weight. The coweight lattice turned up in the sum for completely geometric reasons.
+    \item{} Bismut's proof is \emph{totally different} to Frenkel's proof. Strikingly, \emph{no representation theory is needed}. We didn't even need the theorem of the highest weight. The coroot lattice turned up in the sum for completely geometric reasons.
     \item{} Bismut eventually extended his arguments to give totally new results, including his formulas for the heat kernel on symmetric spaces.
   \end{enumerate}
 \end{frame}
