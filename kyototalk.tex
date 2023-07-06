@@ -175,8 +175,6 @@ Based on joint work with N.~Higson, S.~Liu, F.~Sukochev and D.~Zanin}
   And, most importantly, how do we prove things about it?
 \end{frame}
 
-\section{The primordial history}
-
 \section{Frenkel's formula}
 
 \begin{frame}
@@ -226,7 +224,7 @@ Based on joint work with N.~Higson, S.~Liu, F.~Sukochev and D.~Zanin}
 \begin{frame}{Jacobi identity}
   If $G = \Circ$ is the unit circle, the answer is \emph{yes}. We have
   \[
-    \Tr(e^{t\Delta_{\Circ}}) = \mathrm{Vol}(\Circ)(4\pi t)^{-\frac12}\sum_{n\in \Itgr} e^{-\frac{1}{4t}n^2}.
+    \Tr(e^{t\Delta_{\Circ}}) = \frac{\mathrm{Vol}(\Circ)}{(4\pi t)^{\frac12}}\sum_{n\in \Itgr} e^{-\frac{1}{4t}n^2}.
   \]
   We can prove this via the Poisson summation formula and the fact that
   \[
@@ -237,7 +235,7 @@ Based on joint work with N.~Higson, S.~Liu, F.~Sukochev and D.~Zanin}
 \end{frame}
 
 \begin{frame}{Frenkel's formula}
-  It turns out that $\Tr(e^{t\Delta_G})$ is too difficult to compute. Instead, we can compute a ``shifted" version
+  It turns out that we get a cleaner statement by considering a ``shifted" version
   \[
     \Tr(\lambda(e^H)e^{t\Delta_G})
   \]
@@ -246,7 +244,7 @@ Based on joint work with N.~Higson, S.~Liu, F.~Sukochev and D.~Zanin}
       If $H\in \tf$ is regular (i.e., $\alpha(H)\neq 0$ for all roots $\alpha$), then
       \begin{align*}
           &\Tr(\lambda(e^H)e^{t\Delta_G})\\
-          &= \frac{\mathrm{Vol}(G)e^{4\pi^2tB(\rho,\rho)^2}}{(4\pi t)^{\frac{\mathrm{dim}(G)}{2}}\sigma(H)}\sum_{\gamma \in CR} \left(\prod_{\alpha>0} \langle 2\pi \alpha,H+\gamma\rangle\right) e^{-\frac{1}{4t}B(H+\gamma,H+\gamma)^2} 
+          &= \frac{\mathrm{Vol}(G)e^{4\pi^2tB(\rho,\rho)^2}}{(4\pi t)^{\frac{\mathrm{dim}(G)}{2}}\sigma(H)}\sum_{\gamma \in CR} \left(\prod_{\alpha>0} \langle \alpha,H+\gamma\rangle\right) e^{-\frac{1}{4t}B(H+\gamma,H+\gamma)^2}
       \end{align*}
       where $\sigma$ is the Weyl denominator.
   \end{theorem}
@@ -268,33 +266,27 @@ Based on joint work with N.~Higson, S.~Liu, F.~Sukochev and D.~Zanin}
 \begin{frame}{Remarks on Frenkel's formula}
 If we examine Frenkel's formula
 \begin{align*}
- \sum_{\lambda \in CR^*_+} \frac{1}{\sigma(H)\sigma(K)}\left(\sum_{w \in W} \sgn(w)e^{w(\lambda+\rho)(H)}\right)\\
+ &\sum_{\lambda \in CR^*_+} \frac{1}{\sigma(H)\sigma(K)}\left(\sum_{w \in W} \sgn(w)e^{w(\lambda+\rho)(H)}\right)\\
       &\quad \cdot \left(\sum_{w\in W} \sgn(w)e^{w(\lambda+\rho)(K)}\right)e^{-tB(\lambda+2\rho,\lambda)}\\
-      &=\frac{\mathrm{Vol}(G)e^{4\pi^2tB(\rho,\rho)^2}}{(4\pi t)^{\frac{\mathrm{dim}(G)}{2}}\sigma(H)}\sum_{\gamma \in CR} \left(\prod_{\alpha>0} \langle 2\pi \alpha,H+\gamma\rangle\right) e^{-\frac{1}{4t}B(H+\gamma,H+\gamma)^2}
+      &=\frac{\mathrm{Vol}(G)e^{4\pi^2tB(\rho,\rho)^2}}{(4\pi t)^{\frac{\mathrm{dim}(G)}{2}}\sigma(H)}\sum_{\gamma \in CR} \left(\prod_{\alpha>0} \langle \alpha,H+\gamma\rangle\right) e^{-\frac{1}{4t}B(H+\gamma,H+\gamma)^2}
 \end{align*}
-We can see that a sum over the \emph{weight lattice} is converted into a sum over the \emph{coroot lattice}. The exponential $\exp(-tx^2)$ is converted to $\exp(-\frac{1}{t}x^2)$ (as if this were a Fourier transform).
+We can see that a sum over the \emph{weight lattice} is converted into a sum over the \emph{coroot lattice}. The exponential $\exp(-tx^2)$ is converted to $\exp(-\frac{1}{t}x^2).$ (as if this were a Fourier transform).
 \end{frame}
 
 \begin{frame}{Looking to Bismut}
-Bismut gave a new proof of Frenkel's formula, as the
-\begin{align*}
-          &\Tr(\lambda(e^H)e^{t\Delta_G})\\
-          &= \frac{\mathrm{Vol}(G)e^{4\pi^2tB(\rho,\rho)^2}}{(4\pi t)^{\frac{\mathrm{dim}(G)}{2}}\sigma(H)}\sum_{\gamma \in \CR} \left(\prod_{\alpha>0} \langle 2\pi \alpha,H+\gamma\rangle\right) e^{-\frac{1}{4t}B(H+\gamma,H+\gamma)^2}.
-\end{align*}
-But it differs in some essential ways from Frenkel's proof:
+Bismut gave a new proof of Frenkel's formula, which is really a lot more complicated than the original proof. But it differs in some essential ways from Frenkel's proof:
 \begin{itemize}
-  \item{} Bismut does not use the Peter-Weyl decomposition of $G.$ The theorem of the highest weight is not needed! There is no representation theory of $G.$
+  \item{} Bismut does not use the Peter-Weyl decomposition of $G.$ The theorem of the highest weight is not needed! The proof involves very little information from the representation theory of $G.$
   \item{} The coroot lattice $\CR$ of $G$ emerges in a purely geometric way, rather than as the dual of the weight lattice.
 \end{itemize}
-
 \end{frame}
 
 
 \begin{frame}
-    \huge{Section 2: The Primordial History, or, the Berline-Vergne localisation formula}
+    \huge{Section 2: The Primordial History, or, the Duistermaat--Heckman localisation formula}
 \end{frame}
 
-\begin{frame}{Section introduction}
+\begin{frame}{In the beginning...}
   In this section, I will attempt to give a ``folkloric" story for the origins of the hypoelliptic Laplacian.
   
   I am strongly indebtted to the paper of Choi--Takhtajan (2021) for this explanation.
@@ -327,37 +319,43 @@ But it differs in some essential ways from Frenkel's proof:
   \[
     \frac12\Delta_gu = \frac12\det(g)^{-\frac12}\partial_{\alpha}(g^{\alpha,\beta}\det(g)^{\frac12}\partial_{\beta}u)
   \]
-  This is supposed to be $\Hc(x,-i\partial),$ where $\Hc(x,p) = \frac12 g^{\alpha,\beta}(x)p_{\alpha}p_{\beta}.$ The corresponding Lagrangian is 
+  This is supposed to be $\Hc(x,-i\partial),$ where $\Hc(x,p) = \frac12 g^{\alpha,\beta}(x)p_{\alpha}p_{\beta}.$ The corresponding Lagrangian is
   \[
     \Lc(x,X) = \frac12 g_{\alpha,\beta}(x)X^{\alpha}X^{\beta}
   \]
-  and 
+  and
   \[
-    \Tr(e^{\frac12 t\Delta_g}) = \int_{LX} e^{-\int_0^t \frac12 g_{\alpha,\beta}(\gamma(s))\dot{\gamma}^{\alpha}(s)\dot{\gamma}^\beta(s)\,ds}\, \Dc \gamma
+    \Tr(e^{\frac12 t\Delta_g}) = \int_{LX} e^{-\frac{1}{2t}\int_0^1 g_{\alpha,\beta}(\gamma(s))\dot{\gamma}^{\alpha}(s)\dot{\gamma}^\beta(s)\,ds}\, \Dc \gamma
   \]
-  where the integral on the right-hand side is rigorously defined as a limit of discrete approximations. See Andersson--Driver (1998).
+  where the integral on the right-hand side can be rigorously defined as a limit of discrete approximations. See Andersson--Driver (1998).
 \end{frame}
 
-\begin{frame}{Berline-Vergne localisation}
-  Suppose that we're trying to compute the integral of a differential form $\alpha$ over a manifold $Z,$ like
+\begin{frame}{Duistermaat--Heckman formula}
+  Let $(X,\omega)$ be a symplectic $n$-manifold. The symplectic volume form of $X$ is $\frac{1}{(n/2)!}\omega^{\frac{n}{2}} = \exp(\omega).$
+
+  Let $H\in C^\infty(X),$ and suppose that $H$ has isolated and non-degenerate critical points. Laplace's asymptotic formula tells us that as $t\to\infty,$ we have
   \[
-    \int_Z \alpha,\quad \alpha\in \Omega^{\mathrm{top}}(Z).
+    \int_{X} \exp(-tH) \frac{\omega^{n/2}}{(n/2)!} \sim \sum_{p} \frac{\exp(-tH(p))}{t^{n/2}\det^{\frac12}(2\pi \nabla^2 H(p))}
   \]
-  There is a very effective trick for computing this integral if we have some $\Circ$-action: Assume that $\Circ$ acts
-  on $Z,$ and $\alpha$ is invariant under this action. We have
-  \begin{theorem}[Berline-Vergne localisation]
-    \[
-      \int_Z \alpha = \int_{Z^{0}} \frac{\alpha}{e(N(Z/Z^0))}
-    \]
-    where $Z^0$ is the fixed submanifold under the $\Circ$-action, and $e(N(Z/Z^0))$ is the Euler class of the normal bundle to $Z^0$ in $Z.$    
+  Here the sum is over the critical points of $H.$
+\end{frame}
+
+\begin{frame}{Duistermaat--Heckman formula}
+  $(X,\omega)$ is a symplectic $n$-manifold.
+  \begin{theorem}
+      Suppose that there is a circle action $\Circ\times X\to X$ with isolated fixed points, and let its derivative be the vector field $V.$ If $V$ is Hamiltonian, with Hamiltonian function $H,$ then
+      \[
+          \int_X \exp(-tH) \frac{\omega^{n/2}}{(n/2)!} = \sum_{p} \frac{\exp(-tH(p))}{t^{n/2}\det^{\frac12}(2\pi \nabla^2 H(p))}
+      \]
   \end{theorem}
-  What is of greater interest to us is actually the standard proof of the Berline-Vergne formula.
+  \pause
+  That is to say, for Hamiltonians coming from a circle action, the Laplace asymptotic expansion is exact.
 \end{frame}
 
-\begin{frame}{Proof of Berline-Vergne localisation}
-    Berline-Vergne localisation can be proved in the following way. It is possible to construct a differential form $\Vc \in \Omega^2(X)$ such that
+\begin{frame}{Proof of Duistermaat--Heckman localisation}
+    Duistermaat-Heckman can be proved by introducing a new parameter $b$ in the following way: It is possible to construct a differential form $\Vc \in \Omega^{\bullet}(X)$ such that
     \[
-      \int_Z \alpha = \int_Z \alpha e^{b\Vc},\quad b>0.
+      \int_X \exp(-tH+\omega) = \int_Z \exp(-tH+\omega+b\Vc)\quad b>0.
     \]
     This is proved by showing that the right hand side is independent of $b,$ and then setting $b=0.$ The limit as $b\to\infty$ is computed using Laplace's asymptotic formula.
 \end{frame}
@@ -365,17 +363,21 @@ But it differs in some essential ways from Frenkel's proof:
 \begin{frame}{Bismut's dream}
   We would like to compute $\Tr(e^{t\Delta_g})$ by considering
   \[
-    \int_{LX} e^{-\int_0^t \Lc(\gamma(s),\dot{\gamma}(s))\,ds} \Dc\gamma
+    \int_{LX} e^{-t\int_0^1 \frac12 g_{\alpha,\beta}(\gamma(s)\dot{\gamma}^{\alpha}(s)\dot{\gamma}^\beta(s))\,ds} \Dc\gamma
   \]
-  as an integral of a differential form over the infinite dimensional manifold $L_tX.$
-  Note that $L_tX$ has a $\Circ$-action given by rotating around the loop.
+  as an integral of a differential form over the infinite dimensional manifold $LX.$
+  Note that $LX$ has a $\Circ$-action given by rotating around the loop.
   \\
+  There are reasons to think that this should be a Hamiltonian action, with Hamiltonian function
+  \[
+  \int_0^1 \frac12 g_{\alpha,\beta}(\gamma(s)\dot{\gamma}^{\alpha}(s)\dot{\gamma}^\beta(s))\,ds
+  \]
   \pause
   This theme was very popular in the 1980s -- it led ultimately to Getzler's proof of the local index formula.  
   \pause
   We could try to mimic the proof of Berline-Vergne by introducing a $1$-parameter perturbation of $\Lc,$ something like
   \[
-      \int_{LX} e^{-\int_0^t \Lc(\gamma(s),\dot{\gamma}(s))+b\Vc\,ds} \Dc\gamma
+      \int_{L_tX} e^{-\int_0^t \Lc(\gamma(s),\dot{\gamma}(s))+b\Vc\,ds} \Dc\gamma
   \]
   where $b>0,$ and computing the limit as $b\to\infty.$
   \pause
@@ -383,7 +385,7 @@ But it differs in some essential ways from Frenkel's proof:
 \end{frame}
 
 \begin{frame}{Bismut's dream}
-  Doing Berline-Vergne in loop space is a great idea but it's too difficult to attempt directly.
+  Doing Duistermaat--Heckman in loop space is a great idea but it's too difficult to attempt directly.
   
   But maybe, we can use the Hamiltonian-Lagrangian correspondence to replace incomprehensible loop space integrals with slightly more comprehensible operator traces.
   \begin{center}
@@ -391,7 +393,7 @@ But it differs in some essential ways from Frenkel's proof:
     \[
       \Tr(e^{t\Delta_g}) = \Tr(e^{t\Lc_b})
     \]
-    for all $b>0,$ and such that the limit as $b\to\infty$ gives an interesting formula for the trace?
+    for all $b>0,$ and such that the limit as $b\to\infty$ expresses the trace as a sum over geodesics?
   \end{center}
   \textbf{Answer}: In a way, yes. Not precisely as stated above, but we can get close enough.
 \end{frame}
@@ -399,30 +401,35 @@ But it differs in some essential ways from Frenkel's proof:
 \begin{frame}{The hypoelliptic Laplacian}
   Let $G$ be a compact Lie group, we consider $\Delta_G$ rather than the general $\Delta_g.$ Through some combination of path integral computations, intuition, and guesswork, Bismut found a solution the preceding question.
   \begin{theorem}[Bismut (2011)]
-    Let $H\in \tf$ be regular. There is a differential operator $\Lc_{b,H},$ depending on a positive real parameter $b,$ acting on the space
+    Let $H\in \tf$ be regular. There is a differential operator $\Lc_{b},$ depending on a positive real parameter $b,$ acting on the space
     \[
       C^\infty(\gf\times G,\bigwedge^{\bullet}\gf)
     \]
-    such that
+    such that for $H \in \tf$ we have
     \[
-       \Tr(\lambda(e^H)e^{t\Delta_G}) = \Str(e^{-t\Lc_{b,H}}),\quad b>0.
+       \Tr(\lambda(e^H)e^{t(\Delta_G+C)}) = \Str(\lambda(e^H)e^{-t\Lc_{b}}),\quad b>0.
     \]
-    As $b\to\infty,$ it can be proved that $\Str(e^{-t\Lc_{b,H}})$ converges to Frenkel's formula.
+    where $C$ is a scalar.
+    As $b\to\infty,$ it can be proved that $\Str(\lambda(e^H)e^{-t\Lc_{b}})$ converges to Frenkel's formula.
   \end{theorem}
 \end{frame}
 
 \section{The form of $\Lc_b.$}
 
 \begin{frame}
-  \huge{The Form of $\Lc_b$}
+  \huge{Section 3: The form of $\Lc_b$}
 \end{frame}
 
 \begin{frame}{Notation}
-  $G$ is a compact Lie group of dimension $d,$ and $\gf$ is its Lie algebra. Let $e_1,\ldots,e_d$ be an orthonormal basis of $\gf.$
+  $G$ is a compact Lie group of dimension $d,$ and $\gf$ is its Lie algebra with positive-definite bilinear form $B$. Let $e_1,\ldots,e_d$ be an orthonormal basis of $\gf.$
   
-  We will write the variables of $\gf\times G$ as $(y,x),$ and we have some clifford operators on $\bigwedge^{\bullet}\gf,$ denoted
+  We will write the variables of $\gf\times G$ as $(y,x),$ and we have Clifford operators on $\bigwedge^{\bullet}\gf,$ denoted
   \[
     c(v) = v\wedge + \iota_v,\quad \widehat{c}(v) = v\wedge -\iota_v,\quad v \in \gf.
+  \]
+  These satisfy the Clifford relations
+  \[
+    c(v)c(w)+c(w)c(v) = 2B(v,w),\quad \widehat{c}(v)\widehat{c}(w)+\widehat{c}(w)\widehat{c}(v) = -2B(v,w).
   \]
 \end{frame}
 
@@ -441,7 +448,7 @@ But it differs in some essential ways from Frenkel's proof:
   \[
     D = \sum_{j=1}^d -ic(e_j)\partial_{x_j}+\frac{1}{12}f^j_{k,l}c(e_j)c(e_k)c(e_\ell)
   \]
-  is the \emph{Kostant Dirac operator} on $G.$
+  is the \emph{Kostant Dirac operator} on $G.$ Note that $D^2  =-\Delta_G+C.$
 \end{frame}
 
 \begin{frame}{Structure of $\Lc_b.$}
@@ -455,14 +462,46 @@ But it differs in some essential ways from Frenkel's proof:
   \]
 \end{frame}
 
-\section{Analytic problems and their solutions}
+\section{Section 4: Analytic problems and their solutions}
 
 \begin{frame}
   \huge{Analytic problems and their solutions}
 \end{frame}
 
 \begin{frame}
-  Analysing $\Lc_b,$ we can see that 
+  What we want to do is to show the following three facts:
+  \begin{itemize}
+    \item{} $\lim_{b\to 0} e^{-t\Lc_b} = e^{-tD^2}$ \emph{in the correct sense},
+    \item{} $\lim_{b\to 0} \Str(\lambda(e^H)e^{-t\Lc_b}) = \text{Frenkel's formula.}$
+  \end{itemize}
+  Interestingly, the presence of $H$ is \emph{essential} in the second point.
+\end{frame}
+
+\begin{frame}{The problems we face}
+  The main analytic difficulties we need to deal with are proving \emph{Schauder estimates}
+  \[
+    \|u\|_{s+2} \lesssim \|\Lc_bu\|_s+\|u\|_s,\quad \|v\|_{s+2} \lesssim \|(\partial_t-\Lc_b)v\|_s+\|v\|_s
+  \]
+  and \emph{heat kernel estimates}
+  \[
+    |\exp(-t\Lc_b)(p,q)| \leq \text{(???)}
+  \]
+\end{frame}
+
+\begin{frame}{Obtaining kernel estimates}
+  The traditional way to obtain estimates on a heat kernel $\exp(-tP)(p,q)$ is to combine a \emph{Schauder estimate}
+  \[
+    \|\exp(-tP)\|_{H^{-s}\to H^s} \lesssim t^{-K}
+  \]
+  for some scale of Sobolev spaces $\{H^s\}_{s\in \Rl}$ and all sufficiently large $s,$ with an $L_2$-\emph{estimate}:
+  \[
+    \|M_{\psi}\exp(-tP)M_{\phi}\|_{L_2\to L_2} \lesssim \exp(-\frac1t \mathrm{dist}(\mathrm{supp}(\phi),\mathrm{supp}(\psi)))
+  \]
+  for some bump functions $\phi$ and $\psi.$
+\end{frame}
+
+\begin{frame}
+  Analysing $\Lc_b,$ we can see that
   \begin{align*}
     \Lc_b &= \frac{1}{b^2}\underbrace{\sum_{j=1}^d y_j^2-\partial_{y_j}^2}_{\text{Harmonic oscillator on } \gf}\\
           &\;+ \frac{1}{b}\underbrace{\sum_{j=1}^d y_j\partial_{x_j}}_{\text{Generator of geodesic flow, identifying }TG=\gf\times G}\\
@@ -487,25 +526,15 @@ But it differs in some essential ways from Frenkel's proof:
   \[
     K_b := \frac{1}{b^2}\sum_{j=1}^d y_j^2-\partial_{y_j}^2 + \frac{1}{b}\sum_{j=1}^dy_j\partial_{x_j},\quad (x,y) \in \gf_y\times \gf_x.
   \]
-  where now the $\partial_{x_j}'$ commute.
+  where now the $\partial_{x_j}'$ commute!
+  \pause
+  This is a Kolmogorov-type operator, and we can understand it very well using the theory of nilpotent Lie groups.
 \end{frame}
-
-\begin{frame}{The problems we face}
-  The main analytic difficulties we need to deal with are proving \emph{Schauder estimates}
-  \[
-    \|u\|_{s+2} \lesssim \|\Lc_bu\|_s+\|u\|_s,\quad \|v\|_{s+2} \lesssim \|(\partial_t-\Lc_b)v\|_s+\|v\|_s
-  \]
-  and \emph{heat kernel estimates}
-  \[
-    \exp(-t\Lc_b)(p,q) \leq \text{(???)}
-  \]
-\end{frame}
-
 
 \section{The world's most convoluted proof of Frenkel's formula}
 
 \begin{frame}
-  \huge{Section 4: The world's most convoluted proof of Frenkel's formula}
+  \huge{Section 5: The world's most convoluted proof of Frenkel's formula}
 \end{frame}
 
 \subsection{As $b\to 0.$}
@@ -521,10 +550,10 @@ But it differs in some essential ways from Frenkel's proof:
 \begin{frame}{The projection onto $\ker(Q).$}
   In order to understand how an operator on $L_2(\gf\times G,\bigwedge^{\bullet}\gf)$ converges to an operator on
   $L_2(G),$ we need to understand how $L_2(G)$ is a subspace of $L_2(\gf\times G,\bigwedge^{\bullet}\gf).$
-  
-  \textbf{Solution}: we use a Gaussian function on the $\gf$ fibre. 
+
+  \textbf{Solution}: we use a Gaussian function on the $\gf$ fibre.
   This is like embedding $L_2(\Circ)$ isometrically into $L_2(\Circ\times \Rl)$ by mapping $f(x)$ to $f(x)e^{-\pi y^2}.$
-  
+
   \begin{definition}
     Recall that $Q$ is the Witten Dirac,
     \[
@@ -541,11 +570,23 @@ But it differs in some essential ways from Frenkel's proof:
 \begin{frame}{The $2\times 2$ matrix trick}
   We want to prove that $\exp(-t\Lc_b)$ converges to $P\exp(t\Delta_G)P.$ Actually it is simpler to work with resolvents, and prove that
   \[
-    (\lambda+\Lc_b)^{-1} \rightarrow P(\lambda-\Delta_G)^{-1}P
+    (\lambda-\Lc_b)^{-1} \rightarrow P(\lambda-D^2)^{-1}P
   \]
-  for a suitably large set of $\lambda\in \Cplx.$ By some functional calculus, this is equivalent. 
-  
-  \textbf{Idea:} write the resolvent as a $2\times 2$ matrix.
+  for a suitably large set of $\lambda\in \Cplx.$ By some functional calculus, this is equivalent.
+
+  \textbf{Idea:} write the resolvent as a $2\times 2$ matrix, with respect to the projection $P.$
+\end{frame}
+
+\begin{frame}{The $2\times 2$ matrix trick}
+  Writing $(\lambda+\Lc_b)$ on $L_2(\gf\times G)$ with respect to the decomposition $\mathrm{im}(P)\oplus \mathrm{ker}(P),$ we have
+  \[
+      \lambda+\Lc_b = \begin{pmatrix} \lambda & -\frac1bQD \\ -\frac1bDQ \\ \lambda - \frac{1}{b^2}Q^2-\frac{1}{b}(QD+DQ)  \end{pmatrix}.
+  \]
+  Using the formula for the inverse of a $2\times 2$ block matrix, we get
+  \[
+    \lim_{b\to \infty} (\lambda-\Lc_b)^{-1} = \begin{pmatrix} (\lambda-D^2)^{-1} & 0 \\ 0 & 0\end{pmatrix}.
+  \]
+  In some operator topology.
 \end{frame}
 
 \subsection{As $b\to \infty.$}
@@ -558,7 +599,7 @@ But it differs in some essential ways from Frenkel's proof:
   The much more challenging problem we face is to understand what happens to $\Str(e^{-t\Lc_b})$ as $b\to\infty.$
   Note that:
   \begin{enumerate}
-    \item{} Unlike with $b\to 0,$ we have to take the supertrace first in order that the limit exists. This is analogous to the local index theorem. 
+    \item{} Unlike with $b\to 0,$ we have to take the supertrace first in order that the limit exists. This is analogous to the local index theorem.
     \item{} This argument will be complicated, in part, because we have to do a simultaneous rescaling of the spatial and clifford variables.
     \item{} It is not possible to compute the limit of $\Str(e^{-t\Lc_b})$ directly, instead we need to introduce a shift.
   \end{enumerate}
@@ -566,13 +607,23 @@ But it differs in some essential ways from Frenkel's proof:
 
 \begin{frame}{Techniques}
   Going into all the details with the rescaling of variables is too much to attempt here.... Instead I will briefly indicate what we're aiming for.
-  
+
   What we expect is that
   \[
     \lim_{b\to\infty}\Str(e^{-t\Lc_{b,H}}) = \text{A sum over coweights of }G.
   \]
   The left hand side is an integral over the kernel of the operator. How does an integral converge to a sum?
 \end{frame}
+
+\begin{frame}{Techniques}
+  \begin{theorem}
+    Let $\phi_t$ be the geodesic flow. We have
+    \[
+      |\exp(-tP_b)((e,Y),(e,Y))| \lesssim \exp(-\frac{\|Y\|^2}{tb^4})\exp(-\frac{1}{t})
+    \]
+  \end{theorem}
+\end{frame}
+
 
 \section{Conclusions}
 
