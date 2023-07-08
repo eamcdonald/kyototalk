@@ -187,7 +187,7 @@ Based on joint work with N.~Higson, S.~Liu, F.~Sukochev and D.~Zanin}
 \begin{frame}
   Let $G$ be a connected, simply connected, compact group, with Lie algebra $\gf$ having nondegenerate bilinear form $B.$
   
-  Specify a Cartan subalgebra $\tf \subset G$ and corresponding maximal abelian subgroup $T\subset G.$
+  Specify a Cartan subalgebra $\tf \subset \gf$ and corresponding maximal abelian subgroup $T\subset G.$
   We have the co-root lattice
   \[
     \CR = \{X \in \tf\;:\; \exp(X) = 1_G\}
@@ -247,7 +247,7 @@ Based on joint work with N.~Higson, S.~Liu, F.~Sukochev and D.~Zanin}
       If $H\in \tf$ is regular (i.e., $\alpha(H)\neq 0$ for all roots $\alpha$), then
       \begin{align*}
           &\Tr(\lambda(e^H)e^{t\Delta_G})\\
-          &= \frac{\mathrm{Vol}(G)e^{4\pi^2tB(\rho,\rho)^2}}{(4\pi t)^{\frac{\mathrm{dim}(G)}{2}}\sigma(H)}\sum_{\gamma \in CR} \left(\prod_{\alpha>0} \langle \alpha,H+\gamma\rangle\right) e^{-\frac{1}{4t}B(H+\gamma,H+\gamma)^2}
+          &= \frac{\mathrm{Vol}(G)e^{4\pi^2tB(\rho,\rho)^2}}{(4\pi t)^{\frac{\mathrm{dim}(G)}{2}}\sigma(H)}\sum_{\gamma \in CR} \left(\prod_{\alpha>0} \langle \alpha,H+\gamma\rangle\right) e^{-\frac{1}{4t}B(H+\gamma,H+\gamma)}
       \end{align*}
       where $\sigma$ is the Weyl denominator.
   \end{theorem}
@@ -271,7 +271,7 @@ If we examine Frenkel's formula
 \begin{align*}
  &\sum_{\lambda \in CR^*_+} \frac{1}{\sigma(H)\sigma(K)}\left(\sum_{w \in W} \sgn(w)e^{w(\lambda+\rho)(H)}\right)\\
       &\quad \cdot \left(\sum_{w\in W} \sgn(w)e^{w(\lambda+\rho)(K)}\right)e^{-tB(\lambda+2\rho,\lambda)}\\
-      &=\frac{\mathrm{Vol}(G)e^{4\pi^2tB(\rho,\rho)^2}}{(4\pi t)^{\frac{\mathrm{dim}(G)}{2}}\sigma(H)}\sum_{\gamma \in CR} \left(\prod_{\alpha>0} \langle \alpha,H+\gamma\rangle\right) e^{-\frac{1}{4t}B(H+\gamma,H+\gamma)^2}
+      &=\frac{\mathrm{Vol}(G)e^{4\pi^2tB(\rho,\rho)^2}}{(4\pi t)^{\frac{\mathrm{dim}(G)}{2}}\sigma(H)}\sum_{\gamma \in CR} \left(\prod_{\alpha>0} \langle \alpha,H+\gamma\rangle\right) e^{-\frac{1}{4t}B(H+\gamma,H+\gamma)}
 \end{align*}
 We can see that a sum over the \emph{weight lattice} is converted into a sum over the \emph{coroot lattice}. The exponential $\exp(-tx^2)$ is converted to $\exp(-\frac{1}{t}x^2).$ (as if this were a Fourier transform).
 \end{frame}
