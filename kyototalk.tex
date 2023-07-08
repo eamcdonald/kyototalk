@@ -327,7 +327,7 @@ Bismut gave a new proof of Frenkel's formula, which is really a lot more complic
   \]
   and
   \[
-    \Tr(e^{\frac12 t\Delta_g}) = \int_{LX} e^{-\frac{1}{2t}\int_0^1 g_{\alpha,\beta}(\gamma(s))\dot{\gamma}^{\alpha}(s)\dot{\gamma}^\beta(s)\,ds}\, \Dc \gamma
+    \Tr(e^{\frac12 t\Delta_g}) = \int_{L_tX} e^{-\frac{1}{2}\int_0^t g_{\alpha,\beta}(\gamma(s))\dot{\gamma}^{\alpha}(s)\dot{\gamma}^\beta(s)\,ds}\, \Dc \gamma
   \]
   where the integral on the right-hand side can be rigorously defined as a limit of discrete approximations. See Andersson--Driver (1998).
 \end{frame}
@@ -365,7 +365,7 @@ Bismut gave a new proof of Frenkel's formula, which is really a lot more complic
 \begin{frame}{Bismut's dream}
   We would like to compute $\Tr(e^{t\Delta_g})$ by considering
   \[
-    \int_{LX} e^{-t\int_0^1 \frac12 g_{\alpha,\beta}(\gamma(s))\dot{\gamma}^{\alpha}(s)\dot{\gamma}^\beta(s)\,ds} \Dc\gamma
+    \int_{L_tX} e^{-\int_0^t \frac12 g_{\alpha,\beta}(\gamma(s))\dot{\gamma}^{\alpha}(s)\dot{\gamma}^\beta(s)\,ds} \Dc\gamma
   \]
   as an integral of a differential form over the infinite dimensional manifold $LX.$
   Note that $LX$ has a $\Circ$-action given by rotating around the loop.
@@ -379,7 +379,7 @@ Bismut gave a new proof of Frenkel's formula, which is really a lot more complic
   \pause
   We could try to mimic the proof of Duistermaat--Heckman by introducing a $1$-parameter perturbation of $\Lc,$ something like
   \[
-      \int_{LX} e^{-t\int_0^1 \Lc(\gamma(s),\dot{\gamma}(s))+b\Vc\,ds} \Dc\gamma
+      \int_{LX} e^{-\int_0^t \Lc(\gamma(s),\dot{\gamma}(s))+b\Vc\,ds} \Dc\gamma
   \]
   where $b>0,$ and computing the limit as $b\to\infty.$
   \pause
